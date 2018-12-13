@@ -36,7 +36,7 @@ Scheduler bot 은 양 사용자의 캘린더에 일정을 추가할 권한이 �
 
 사용자는 가장 적합한 시간을 고르고 bot은 미팅 시간을 잡고 각각의 사용자의 캘린더에 일정을 추가하고 메일을 보냅니다. 
   
-Scheduler bot 은 can also create reminders for users. Using the same process as scheduling, the bot will set a reminder in the users calendar. These reminders are also added to an internal list of reminders that the scheduler will remind  the user of the task at midnight, and the user will see the reminder in their slack Direct Messages when they next open slack. This is done through the `script.js` file, Heroku's script scheduler, acting as a cron job to fire every night at midnight.  
+Scheduler bot 은 사용자들을 위한 리마인더도 생성 가능합니다. 스케줄링과 같은 과정을 통해, 사용자들의 캘린더에 리마인더를 설정합니다. 이러한 리마인더는 스케줄러의 내부 리마인더 리스트에도 추가되며 사용자들에게는 자정에 알림됩니다. 또한 사용자들은 다음에 slack을 열 시에 slack direct message로 리마인더를 확인할 수 있습니다. 이는 Heroku 의 스크립트 스케줄러 `script.js` 파일을 통해 가능하며, 매일 밤 자정에 cron 작업을 수행합니다. 
   
 ```Example:  
 User: "Remind me to turn in progress report"  
@@ -46,35 +46,35 @@ Bot: "Confirm reminder"
 Bot: "Reminder Set"  
 ```
 
-### Usage
+### 사용처
 
-#### Authenicating throught Google:  
+#### Google 을 통한 확인 작업:  
 ![](https://cl.ly/1u3x1y2Y1W1u/Screen%20Recording%202017-08-01%20at%2008.12%20PM.gif)
 
-#### Set Reminders:  
+#### Reminders 설정:  
 ![](https://cl.ly/0T3Z3c0m2n2k/Screen%20Recording%202017-08-01%20at%2008.22%20PM.gif)
 
-#### Schedules Meetings with other Slack Users:
+#### 다른 Slack 사용자와의 미팅 스케줄링:
 
-##### Checks Permissions for both users:  
+##### 양 사용자의 캘린더 접근 허가 확인:  
 ![](https://cl.ly/1p39180G0a0O/Screen%20Recording%202017-08-01%20at%2008.25%20PM.gif)
 
-##### Schedules meeting on both users calendar:  
+##### 양 사용자의 캘린더에 미팅 일정 추가:  
 ![](https://cl.ly/0g200n0I2w1M/Screen%20Recording%202017-08-01%20at%2008.32%20PM.gif)
 
-##### Checks for time conflicts for both users:  
+##### 양 사용자의 시간 충돌 여부 확인:  
 ![](https://cl.ly/3S1N0q2a1W0b/Screen%20Recording%202017-08-01%20at%2008.40%20PM.gif)  
 ![](https://cl.ly/0o401z1J2k2k/Screen%20Recording%202017-08-01%20at%2008.48%20PM.gif)
 
 
-## Running the tests
+## 테스트 실행
 
-Since the free version of Heroku has been used, the server will automatically sleep after 12 hours. To test this application, simply deploy this project to heroku, set the Heroku address with the */slack/interactive* endpoint to the request URL for interactive messages in the Slack API application dashboard. For example, here is my interactive message endpoint:  
+Heroku 의 무료버전이 사용되므로, 서버는 12 시간 후 자동으로 종료됩니다. 이 앱을 테스트하고자 한다면, 이 프로젝트를 heroku에 위임해야 합니다. Heroku의 주소를 */slack/interactive* endpoint 로 설정하여 Slack API 앱 게시판과의 상호 메세지를 위한 URL을 요청하세요. 예를 들면, 제 상호 메세지 endpoint는 다음과 같습니다:  
 *https://dry-sierra-94244.herokuapp.com/slack/interactive*  
   
-You will also need to set up a mongodb. Instructions on how to do this can be found [here.](http://fredrik.anderzon.se/2017/01/17/setting-up-a-free-mongodb-database-on-mlab-and-connecting-to-it-with-node-js/)  
+mongodb 도 설정해야 하며 사용 방법은 다음 주소에서 확인할 수 있습니다.[here.](http://fredrik.anderzon.se/2017/01/17/setting-up-a-free-mongodb-database-on-mlab-and-connecting-to-it-with-node-js/)  
 
-Finally, set all of your environmental variables in heroku. You will need the following names for your environment variables:  
+최종적으로, heroku 에서 여러분의 환경 변수를 설정하세요. 다음과 같은 환경 변수 이름들을 필요로 할 것입니다:  
 API_AI_TOKEN: *Your API.AI token*  
 CLIENT_ID: *Your Slack credentials*  
 CLIENT_SECRET: *Your Slack credentials*  
@@ -85,7 +85,7 @@ MONGODB_URI: *Mongo DB credentials*
 SLACK_API_TOKEN: *Bot User OAuth Access Token*  
 
 
-## Built With
+## 구현에 필요한 것
 
 * [API.AI](https://api.ai/) - The ai/machine learning tool used to process natural language  
 * [Slack](https://api.slack.com/) - Chat application used for RTM and interactive messages
@@ -93,6 +93,6 @@ SLACK_API_TOKEN: *Bot User OAuth Access Token*
 * [Express](https://expressjs.com/) - Backend Server  
 
 
-## Credits
+## 저작권
 
-Credits for this code go to [floresfxf](https://www.youtube.com/watch?v=nvLJq4GnCg4&feature=youtu.be). I've merely created a wrapper to get people started. 
+이 코드의 저작권은 다음 사이트에 있습니다. [floresfxf](https://www.youtube.com/watch?v=nvLJq4GnCg4&feature=youtu.be). 저는 처음 시작하는 사람들을 위해 조금 변형했을 뿐입니다.
