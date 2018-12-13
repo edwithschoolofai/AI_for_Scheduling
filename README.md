@@ -1,21 +1,21 @@
 # Sam the Slack Scheduler Bot
 
-### Overview
+### 개론
 
-This is the code for [this](https://www.youtube.com/watch?v=nvLJq4GnCg4&feature=youtu.be) video on Youtube by Siraj Raval on AI for scheduling. 
+이 코드는 다음 Siraj Raval의 유튜브 영상 AI for scheduling [this](https://www.youtube.com/watch?v=nvLJq4GnCg4&feature=youtu.be) 을 위한 코드입니다.
 
-### Purpose
+### 목적
 
-Productivity is hard to come by in fast-paced work environments. Dozens of browsers tabs, desktop apps, and mobile notifications drown your ability to focus and concentrate. As companies like Google, Facebook, Amazon and IBM continue to build powerful AI-based platforms and tools, the barrier to applying machine learning to real user problems is becoming dramatically reduced. 
+생산성은 빠른 속도의 작업 환경을 따라가기 힘듭니다. 수십 개의 브라우저 탭, 바탕화면 앱과 휴대폰 알람은 여러분이 집중하지 못하게 방해합니다. Google, Facebook, Amazon, IBM 과 같은 기업에서는 강력한 AI 기반의 플랫폼과 도구를 지속적으로 만들어 실제 사용자 문제에 기계학습을 적용하는 데 있던 걸림돌을 급격하게 낮추고 있습니다.
 
-The Slack Scheduler Bot solves a real customer problem by streamlining workflow for a very large, immediately addressable market (teams who schedules meetings and also use Slack) at the exact right time (advent of new powerful, easy-to-use AI technologies + proliferation of software tools used on job)
+The Slack Scheduler Bot 은 크고 addressable한 시장 (미팅 일정을 잡고 Slack을 사용하는 팀) 의 업무량을 정확한 시간 내에 (새롭고 강력하며 사용하기 쉬운 인공지능 기술의 도래 + 직장에서 사용되는 소프트웨어 도구의 확산) 간소화함으로써 실제 사용자 문제를 해결합니다.
 
 
-### Overview
+### 개론
 
-TL;DR: The Slack Scheduler bot is a langauge aware intelligent slack bot for scheduling reminders and meetings with other slack users in google calendar. 
+TL;DR: The Slack Scheduler bot 은 구글 캘린더를 사용하는 다른 slack 사용자와의 리마인더 혹은 미팅을 잡는 언어 인식 인텔리젼트 slack bot입니다.
 
-This Slack Scheduler bot is built using many asynchronous API's, making it very difficult to maintain state across multiple users. The three core APIs used are Slack RTM, API.AI, and Google Calendar API. When the slack bot is sent a message, it is immedaitely sent to API.AI where multiple intents are already set up to parse the input and decide how to respond based off of the users input. For example, if you were to input "Schedule a meeting with *a person* at *time* on *date or today/tomorrow/etc* to discuss *a meeting topic* for *one hour*". If any of the italic fields are missing, the response will ask for the user for the specific field. Duration is not required, but will default to 30 minutes if not included.
+Slack Scheduler bot 은 여러 비동기 API 들로 만들어져, 다중 사용자들의 상태를 유지하는 데 매우 힘듭니다. 세 가지 중요 API는 Slack RTM, API.AI, a그리고 Google Calendar API 입니다. Slack bot 이 메세지를 보내면, 즉각적으로 API.AI 에 보내고 이를 분석하여 미리 저장된 의도를 파악한 뒤 사용자의 입력을 기반으로 반응을 어떻게 할 지 결정합니다. 예를 들어, 다음과 같이 입력했을 때 "*특정 사람과* *특정 시간에* *특정 날짜에* *미팅 주제* 를 얘기나누기 위해 *1 시간 동안* 미팅 약속을 잡아주세요". 이탤릭체에 해당하는 부분이 없으면, 특정 부분을 사용자에게 다시 물어볼 것입니다. 소요 시간은 필요하지 않지만, 입력되지 않은 경우 기본값은 30 분 입니다.
   
 ```Example:  
 User: "Schedule a meeting with @pneelde tomorrow"  
@@ -28,13 +28,15 @@ Bot: "Meeting Confirmed"
 ```
   
   
-The scheduler bot will then check to see if it has permissions to add events to both users calendar. If it doesnt, it will inform the user to have the user message the bot and the bot will send the user a link to give the bot permission to edit thier calendar.  
+Scheduler bot 은 양 사용자의 캘린더에 일정을 추가할 권한이 있는지 확인합니다. 권한이 없다면, 사용자에게 링크를 보내 캘린더 수정 권한을 요구합니다.
   
-If all permissions are set, it will then check both users calendars to see if there any prexisting conflicts with any of the users calendars.  
-If there are, the bot will then respond, letting the user know there are time conflicts, and then will prompt the user to pick a new time from a list of first 10 available meeting slots that work for every user invited to the meeting. This is limited to 3 free times per day, and will check up to 7 business days ahead of time for these free times. It will check for free times for the duration of the meeting, if provided. If not provided, it will default to 30 minute free slots.  
-The user will select the best time and the bot will then schedule the meeting, adding the event to all users calendars and sending each user and email. 
+권한을 받고 나면, 양 사용자의 캘린더를 확인하여 다른 사용자와의 선약이 있는지 확인합니다.
+
+선약이 있다면, bot 은 답장하여 양 사용자들에게 선약이 있음을 알리고, 미팅에 참석할 모든 사용자가 가능한 10 개의 미팅 시간 후보 리스트를 보여주고 고르도록 합니다. 이는 하루 당 최대 세 개의 타임만 잡도록 제한되어있으며 이 빈 시간 이전 7 일을 확인합니다. 소요 시간이 입력된 경우, 미팅 소요 시간 동안 전부 가능한지 확인합니다. 그렇지 않은 경우, 30 분을 기본값으로 잡습니다.
+
+사용자는 가장 적합한 시간을 고르고 bot은 미팅 시간을 잡고 각각의 사용자의 캘린더에 일정을 추가하고 메일을 보냅니다. 
   
-The scheduler bot can also create reminders for users. Using the same process as scheduling, the bot will set a reminder in the users calendar. These reminders are also added to an internal list of reminders that the scheduler will remind  the user of the task at midnight, and the user will see the reminder in their slack Direct Messages when they next open slack. This is done through the `script.js` file, Heroku's script scheduler, acting as a cron job to fire every night at midnight.  
+Scheduler bot 은 can also create reminders for users. Using the same process as scheduling, the bot will set a reminder in the users calendar. These reminders are also added to an internal list of reminders that the scheduler will remind  the user of the task at midnight, and the user will see the reminder in their slack Direct Messages when they next open slack. This is done through the `script.js` file, Heroku's script scheduler, acting as a cron job to fire every night at midnight.  
   
 ```Example:  
 User: "Remind me to turn in progress report"  
