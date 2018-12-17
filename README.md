@@ -95,4 +95,4 @@ SLACK_API_TOKEN: *Bot User OAuth Access Token*
 
 ## 저작권
 
-이 코드의 저작권은 [floresfxf](https://www.youtube.com/watch?v=nvLJq4GnCg4&feature=youtu.be)에 . 저는 처음 시작하는 사람들을 위해 조금 변형했을 뿐입니다.
+이 코드의 저작권은 [floresfxf](https://www.youtube.com/watch?v=nvLJq4GnCg4&feature=youtu.be)에 있습니다. 저는 처음 시작하는 사람들을 위해 조금 변형했을 뿐입니다.
