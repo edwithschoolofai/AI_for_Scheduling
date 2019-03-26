@@ -92,6 +92,9 @@ SLACK_API_TOKEN: *Bot User OAuth Access Token*
 * [Google Calendar API](https://developers.google.com/google-apps/calendar/) - 미팅 스케줄링과 리마인더 설정에 사용  
 * [Express](https://expressjs.com/) - 백엔드 서버
 
+## IPython 
+[ 코드 돌려보기 (Colab) ](https://colab.research.google.com/github/edwithschoolofai/AI_for_Scheduling/blob/master/AI%20for%20Scheduling.ipynb
+) 
 
 ## 저작권
 
